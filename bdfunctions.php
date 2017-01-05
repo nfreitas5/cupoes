@@ -10,22 +10,22 @@ function connectbd($servername, $username, $password, $database){
 	return $conn;
 }
 
-function getallcupoes($conn) {
+function getallcupons($conn) {
 	$sql = "SELECT * from cupao";
 	$result = $conn->query($sql);
 
 	if($result->num_rows > 0 ) {
 		while($row = $result->fetch_assoc()) {
-			$cupoes_existentes[]=$row["code"];
+			$existing_cupons[]=$row["code"];
 		}
 	}
 
-	return $cupoes_existentes;
+	return $existing_cupons;
 }
 
-function checkcupao ($cupao) {
+function checkcupon ($code) {
 	/* verificar directamente na BD se cupao existe*/
-	$sql = "SELECT * from cupao where code='".mysql_escape_string($cupao)."'";
+	$sql = "SELECT * from cupao where code='".mysql_escape_string($code)."'";
 	$result = $conn->query($sql);
 
 
@@ -37,8 +37,8 @@ function checkcupao ($cupao) {
 
 }
 
-function insertcupao ($conn,$cupao) {
-	$sql = "INSERT INTO cupao (id, code) VALUES (NULL,'".mysql_escape_string($cupao)."')";
+function insertcupon ($conn,$code) {
+	$sql = "INSERT INTO cupao (id, code) VALUES (NULL,'".mysql_escape_string($code)."')";
     if( $conn->query($sql) === TRUE) {
 		echo "<br>New record created successfully<br>";
 		return 0;
